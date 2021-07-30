@@ -1,0 +1,1 @@
+# tencent-component-types
