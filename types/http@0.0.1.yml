@@ -1,3 +1,5 @@
+# component doc: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md
+
 inputs:
   src:
     type: src
