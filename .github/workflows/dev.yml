@@ -1,0 +1,27 @@
+name: CI for dev
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deployAndInvokeSCF:
+    runs-on: ubuntu-latest
+    env:
+      TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+      TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+      SERVERLESS_PLATFORM_VENDOR: tencent
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Install serverless cli
+        run: sudo npm i serverless -g
+      - name: Deploy and invoke SCF
+        run: |
+          cd scf
+          npm i
+          sls deploy
+          sls invoke
