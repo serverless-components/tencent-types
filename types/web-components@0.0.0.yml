@@ -4,5 +4,5 @@
 inputs:
   region:
     type: string
-    description: inputs.region 必须为字符串
+    description: inputs.region 必须为字符串儿
     level: error

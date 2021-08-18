@@ -1,0 +1,21 @@
+app: sync-types
+name: sync-types
+component: scf
+
+inputs:
+  src:
+    src: ./
+    include:
+      - '../types/**'
+  handler: index.main_handler
+  runtime: Nodejs12.16
+  region: ${env:REGION}
+  timeout: 300
+  environment:
+    variables:
+      REDIS_HOST: ${env:REDIS_HOST}
+      REDIS_PORT: ${env:REDIS_PORT}
+      REDIS_PASSWORD: ${env:REDIS_PASSWORD}
+  # vpcConfig:
+  #   vpcId: ${env:VPC_ID}
+  #   subnetId: ${env:SUBNET_ID}
