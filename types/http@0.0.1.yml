@@ -1,0 +1,176 @@
+inputs:
+  src:
+    type: src
+  type:
+    type: string
+    message: "type 无法识别,当前只支持 event 和 web"
+    allow:
+      - event
+      - web
+  region:
+    type: string
+  faas:
+    type: object
+    keys:
+      framework:
+        type: string
+        required: true
+        allow:
+          - express
+          - koa
+          - egg
+          - nextjs
+          - nuxtjs
+          - nestjs
+          - flask
+          - django
+          - laravel
+        message: "faas/framework 参数错误，请参考: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#faas"
+      runtime:
+        type: string
+        message: "运行时选择错误，请参考https://cloud.tencent.com/document/product/583/54977"
+        allow:
+          - Python2.7
+          - Python3.6
+          - Nodejs6.10
+          - Nodejs8.9
+          - Nodejs10.15
+          - Nodejs12.16
+          - Php5
+          - Php7
+          - Go1
+          - Java8
+          - CustomRuntime
+      name:
+        type: string
+        regex: '^[A-Za-z][\w-_]{0,58}[A-Za-z0-9]$'
+        message: "只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60 个字符"
+      timeout:
+        type: number
+        min: 1
+        max: 900
+        message: "timeout 取值范围是 [1, 900]"
+      memorySize:
+        type: number
+        min: 64
+        max: 3072
+        message: "内存大小选择错误，可选范围 64、128MB-3072MB，并且以 128MB 为阶梯"
+        allow:
+          - 64
+          - 128
+          - 256
+          - 384
+          - 512
+          - 640
+          - 768
+          - 896
+          - 1024
+          - 1152
+          - 1280
+          - 1408
+          - 1536
+          - 1664
+          - 1792
+          - 1920
+          - 2048
+          - 2176
+          - 2304
+          - 2432
+          - 2560
+          - 2688
+          - 2816
+          - 2944
+          - 3072
+      tags:
+        type: array
+        items:
+          - type: object
+            keys:
+              key:
+                type: string
+                required: true
+              value:
+                type: string
+                required: true
+  apigw:
+    type: object
+    keys:
+      customDomains:
+        type: array
+        items:
+          - type: object
+            keys:
+              domain:
+                type: string
+                required: true
+              pathMap:
+                type: object
+                keys:
+                  path:
+                    type: string
+                    required: true
+                  environment:
+                    type: string
+                    required: true
+      tags:
+        type: array
+        items:
+          - type: object
+            keys:
+              key:
+                type: string
+                required: true
+              value:
+                type: string
+                required: true
+  assets:
+    cos:
+      type: object
+      required: true
+      keys:
+        bucket:
+          type: string
+          required: true
+        sources:
+          type: array
+          items:
+            - type: object
+              keys:
+                src:
+                  type: string
+                  required: true
+    cdn:
+      type: object
+      keys:
+        domain:
+          type: string
+          required: true
+        forceRedirect:
+          type: object
+          keys:
+            switch:
+              type: string
+              message: "访问强制跳转配置开关配置失败, on：开启，off：关闭"
+              allow:
+                - on
+                - off
+            https:
+              type: object
+              keys:
+                certId:
+                  type: string
+                  required: true
+                http2:
+                  type: string
+                  required: true
+                  message: "是否开启 HTTP2 配置错误，on： 开启，off： 关闭"
+                  allow:
+                    - on
+                    - off
+            area:
+              type: string
+              message: "area 参数错误，请参考: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#cdn"
+              allow:
+                - mainland
+                - overseas
+                - global
