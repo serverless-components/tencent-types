@@ -172,17 +172,3 @@ inputs:
               imageUrl:
                 type: required
                 type: string
-  triggers:
-    type: array
-    items:
-      - type: object
-        keys:
-          type:
-            type: string
-            required: true
-          function:
-            type: string
-            required: true
-          parameters:
-            type: object
-            required: true
