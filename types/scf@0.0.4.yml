@@ -1,7 +1,6 @@
 inputs:
   src:
     type: src
-    required: true
   type:
     type: string
     message: "type 无法识别,当前只支持 event 和 web"
