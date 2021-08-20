@@ -1,8 +1,0 @@
-# Types for these components: express, koa, egg, nextjs, nuxtjs, nestjs, flask, django, laravel, thinkphp 
-# Ref: https://github.com/serverless-components/tencent-framework-components/blob/master/docs/configure.md
-
-inputs:
-  region:
-    type: string
-    description: inputs.region 必须为字符串儿
-    level: error
