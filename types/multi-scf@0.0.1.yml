@@ -1,4 +1,6 @@
 # doc: https://github.com/serverless-components/tencent-multi-scf/blob/master/docs/configure.md
+# Due to these two fields `functions` and `trigger` have some specific situations on component `multi-scf`, we will not write the rules in config, but validate them in codes. 
+# Details: serverlessteam.slack.com/archives/G01HR0Z42R3/p1629432204011700?thread_ts=1629365324.008300&cid=G01HR0Z42R3
 
 inputs:
   src:
