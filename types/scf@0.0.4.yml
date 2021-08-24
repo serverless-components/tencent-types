@@ -12,6 +12,8 @@ inputs:
   name:
     type: string
     rules:
+      - regex: '^[A-Za-z][\w-_]*[A-Za-z0-9]$'
+        message: "只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾"
       - min: 2
         max: 60
         message: "长度需要介于2与60之间"
