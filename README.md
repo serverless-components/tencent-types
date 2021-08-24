@@ -9,9 +9,11 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 
 ## 配置说明
 
+配置示例: https://github.com/serverlessinc/tencent-component-types/blob/main/types/scf%400.0.4.yml
+
 ### 支持的类型
 
-| type     | 具体限制条件					|
+| type     | 可选的限制条件					|
 | ---  | ---  |
 | string   | required, min, max, regex, allow                                |
 | number   | required, min, max, allow                                       |
@@ -24,24 +26,24 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 
 ### TYPE YML 支持的字段列表
 
-| field        | 必填 | 示例                                            | 备注                         |
-| ------------ | ---- | ----------------------------------------------- | ---------------------------- |
-| message      | 否   | string/number/boolean/object/array/datetime/url |                              |
-| messageLevel | 否   |                                                 | 默认 warning                 |
-| inputs       | 否   |                                                 | 默认 error， error会终止进程 |
+| field        | 必填 | 备注                         |
+| ------------ | ---- | ---------------------------- |
+| message      | 否   | 全局消息，每一次部署都展示给用户   |
+| messageLevel | 否   | 默认 warning，不中断部署                 |
+| inputs       | 否   | 对 inputs 内容进行校验的规则 |
 
 
-#### inputs 中字段支持的字段
+#### inputs 中支持的字段
 
 | type     | 必填 | 示例                                            | 备注        |
 | -------- | ---- | ----------------------------------------------- | ----------- |
 | type     | 是   | string/number/boolean/object/array/datetime/url |             |
 | required | 否   |                                                 | 默认 false  |
-| rules    | 否   | 用户填写多个规则                                                |             |
+| rules    | 否   | 用户填写多个规则                 |    数组类型         |
 | items    | 否   |                                                 | 数组类型    |
 | keys     | 否   |                                                 | Object 类型 |
 
-> 只有一个规则，可以将规则直接写在inputs字段条件中，不需要嵌套在 rules
+> 只有一个规则时，可以将规则直接写在inputs字段条件中，不需要嵌套在 rules
 
 ## Types 版本匹配规则
 1. 如果用户没有指定组件版本，使用该组件最新版 types 进行校验
