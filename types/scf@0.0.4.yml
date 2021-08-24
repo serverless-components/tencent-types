@@ -17,6 +17,9 @@ inputs:
       - min: 2
         max: 60
         message: "长度需要介于2与60之间"
+      - max: 50
+        message: "警告：长度接近最大值，建议减少实例名称长度"
+        level: warning
   handler:
     type: string
   runtime:
