@@ -6,7 +6,7 @@ inputs:
   src:
     src: ./
     include:
-      - '../types/**'
+      - '../*.yml'
   handler: index.main_handler
   runtime: Nodejs12.16
   region: ${env:REGION}
