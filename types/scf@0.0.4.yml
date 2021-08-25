@@ -174,11 +174,13 @@ inputs:
                       - prepub
                   endpoints:
                     type: array
+                    required: true
                     items:
                       - type: object
                         keys:
                           path:
                             type: string
+                            required: true
                           method:
                             type: string
                           enableCORS:
