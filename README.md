@@ -3,13 +3,9 @@
 This repo contains types used to validate `serverless.yml` and an SCF instance used to sync types to our redis database.
 Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 
-## 项目结构
-- [./types](./types): All types lives here
-- [./scf](./scf): The SCF instance used to sync types to database
-
 ## 配置说明
 
-配置示例: https://github.com/serverlessinc/tencent-component-types/blob/main/types/scf%400.0.4.yml
+配置示例: [./scf@0.0.4.yml](./scf@0.0.4.yml)
 
 ### 支持的类型
 
@@ -46,9 +42,10 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 > 只有一个规则时，可以将规则直接写在inputs字段条件中，不需要嵌套在 rules
 
 ## Types 版本匹配规则
+
 1. 如果用户没有指定组件版本，使用该组件最新版 types 进行校验
 2. 如果用户指定了组件版本，使用的小于等于组件版本，并且是最新版的 types 进行校验
 
 ## How to use
 
-To sync types to dev env: run [this workflow](https://github.com/serverlessinc/tencent-component-types/actions/workflows/dev.yml)
+To sync types to dev env: run [this workflow](https://github.com/serverless/tencent-types/actions/workflows/dev.yml)

@@ -17,9 +17,10 @@ const tencentStore = new Redis({
  * 3. Save to redis
  */
 exports.main_handler = async (event, context) => {
-  const typeFiles = fs.readdirSync(path.join(__dirname, './types'));
+  const typeFiles = fs.readdirSync(__dirname);
   for (const typeFileName of typeFiles) {
-    const typeYml = fs.readFileSync(path.join(__dirname, './types', typeFileName), 'utf8');
+    if (!typeFileName.endsWith('.yml') || !typeFileName.includes('@')) continue;
+    const typeYml = fs.readFileSync(path.join(__dirname, typeFileName), 'utf8');
     const typeObj = yaml.load(typeYml);
 
     const typeHashKey = `Types:${typeFileName.split('@')[0]}`;
