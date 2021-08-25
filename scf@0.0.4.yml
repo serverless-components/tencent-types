@@ -1,3 +1,5 @@
+# doc: https://github.com/serverless-components/tencent-scf/blob/master/docs/configure.md
+
 inputs:
   src:
     type: src
@@ -9,8 +11,15 @@ inputs:
       - web
   name:
     type: string
-    message: "只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60 个字符"
-    regex: '^[A-Za-z][\w-_]{0,58}[A-Za-z0-9]$'
+    rules:
+      - regex: '^[A-Za-z][\w-_]*[A-Za-z0-9]$'
+        message: "只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾"
+      - min: 2
+        max: 60
+        message: "长度需要介于2与60之间"
+      - max: 50
+        message: "警告：长度接近最大值，建议减少实例名称长度"
+        level: warning
   handler:
     type: string
   runtime:
@@ -165,11 +174,13 @@ inputs:
                       - prepub
                   endpoints:
                     type: array
+                    required: true
                     items:
                       - type: object
                         keys:
                           path:
                             type: string
+                            required: true
                           method:
                             type: string
                           enableCORS:
