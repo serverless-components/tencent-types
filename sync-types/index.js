@@ -17,9 +17,10 @@ const tencentStore = new Redis({
  * 3. Save to redis
  */
 exports.main_handler = async (event, context) => {
-  const typeFiles = fs.readdirSync(__dirname);
+  const typeFiles = fs
+    .readdirSync(__dirname)
+    .filter(fileName => fileName.endsWith('.yml') && fileName.includes('@'));
   for (const typeFileName of typeFiles) {
-    if (!typeFileName.endsWith('.yml') || !typeFileName.includes('@')) continue;
     const typeYml = fs.readFileSync(path.join(__dirname, typeFileName), 'utf8');
     const typeObj = yaml.load(typeYml);
 
@@ -29,10 +30,10 @@ exports.main_handler = async (event, context) => {
     await tencentStore.hset(typeHashKey, typeVersion, typeValue);
     console.log(typeFileName, 'done!');
   }
-  const typeVersions = await tencentStore.hkeys(`Types:web-components`);
+  // const typeVersions = await tencentStore.hkeys(`Types:web-components`);
 
   return {
-    typeVersions,
+    // typeVersions,
     typeFiles,
   }
 }
