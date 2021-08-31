@@ -75,6 +75,22 @@ inputs:
     keys:
       variables:
         type: object
+  vpcConfig:
+    type: object
+    keys:
+      vpcId:
+        type: string
+      subnetId:
+        type: string
+  deadLetter:
+    type: object
+    keys:
+      Type:
+        type: string
+        required: true
+      Name:
+        type: string
+        required: true
   timeout:
     type: number
     min: 1
@@ -82,7 +98,8 @@ inputs:
   initTimeout:
     type: number
     min: 1
-    message: "数字类型，最小值为1"
+    max: 30
+    message: "函数初始化超时时间，单位为秒，可选值范围 1-30 秒"
   cfs:
     type: array
     items:
@@ -103,6 +120,12 @@ inputs:
     type: boolean
   eip:
     type: boolean
+  image:
+    type: object
+    keys:
+      imageUrl:
+        type: string
+        required: true
   installDependency:
     type: boolean
   asyncRunEnable:
@@ -132,13 +155,15 @@ inputs:
             keys:
               parameters:
                 type: object
+                required: true
                 keys:
                   name:
                     type: string
                   enable:
                     type: boolean
                   cronExpression:
-                    type: string
+                    type: number
+                    required: true
                   argument:
                     type: string
           apigw:
@@ -201,14 +226,17 @@ inputs:
                     type: boolean
                   bucket:
                     type: string
+                    required: true
                   filter:
                     type: object
+                    required: true
                     keys:
                       prefix:
                         type: string
                       suffix:
                         type: string
                   events:
+                    required: true
                     type: string
                     message: "cos.events 无法识别，请参考 https://cloud.tencent.com/document/product/583/9707#cos-.E8.A7.A6.E5.8F.91.E5.99.A8.E5.B1.9E.E6.80.A7"
                     allow:
@@ -260,6 +288,7 @@ inputs:
                     type: boolean
                   name:
                     type: string
+                    required: true
           cls:
             type: object
             keys:
