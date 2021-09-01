@@ -15,8 +15,9 @@ inputs:
       - regex: '^[A-Za-z][\w-_]*[A-Za-z0-9]$'
         message: "只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾"
       - min: 2
-        max: 60
-        message: "长度需要介于2与60之间"
+        message: "长度不能小于2"
+      - max: 60
+        message: "长度不能大于60"
   handler:
     type: string
   runtime:
@@ -36,6 +37,23 @@ inputs:
       - CustomRuntime
   region:
     type: string
+    message: "地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8"
+    allow:
+      - ap-beijing
+      - ap-chengdu
+      - ap-chongqing
+      - ap-guangzhou
+      - ap-hongkong
+      - ap-mumbai
+      - ap-seoul
+      - ap-shanghai
+      - ap-shanghai-fsi
+      - ap-shenzhen-fsi
+      - ap-singapore
+      - ap-tokyo
+      - eu-frankfurt
+      - na-siliconvalley
+      - na-toronto
   memorySize:
     type: number
     min: 64
