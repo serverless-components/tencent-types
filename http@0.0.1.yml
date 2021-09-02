@@ -2,7 +2,7 @@
 
 inputs:
   src:
-    type: src
+    type: "src/object"
   type:
     type: string
     message: "type 无法识别,当前只支持 event 和 web"
@@ -11,6 +11,23 @@ inputs:
       - web
   region:
     type: string
+    message: "地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8"
+    allow:
+      - ap-beijing
+      - ap-chengdu
+      - ap-chongqing
+      - ap-guangzhou
+      - ap-hongkong
+      - ap-mumbai
+      - ap-seoul
+      - ap-shanghai
+      - ap-shanghai-fsi
+      - ap-shenzhen-fsi
+      - ap-singapore
+      - ap-tokyo
+      - eu-frankfurt
+      - na-siliconvalley
+      - na-toronto
   faas:
     type: object
     keys:
@@ -27,7 +44,7 @@ inputs:
           - flask
           - django
           - laravel
-        message: "faas/framework 参数错误，请参考: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#faas"
+        message: "framework 参数选择错误，请参考: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#faas"
       runtime:
         type: string
         message: "运行时选择错误，请参考https://cloud.tencent.com/document/product/583/54977"
@@ -47,6 +64,24 @@ inputs:
         type: string
         regex: '^[A-Za-z][\w-_]{0,58}[A-Za-z0-9]$'
         message: "只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60 个字符"
+      environment:
+         type: array
+         items:
+          - type: object
+            keys:
+              key:
+                type: string
+                required: true
+              value:
+                type: string
+                required: true
+      vpc:
+        type: object
+        keys:
+          vpcId:
+            type: string
+          subnetId:
+            type: string
       timeout:
         type: number
         min: 1
@@ -97,6 +132,43 @@ inputs:
   apigw:
     type: object
     keys:
+      id:
+        type: string
+      name:
+        type: string
+      protocols:
+        type: array
+        items:
+          - type: string
+            message: "protocols 无法识别，当前只支持 http, https"
+            allow:
+              - http
+              - https
+      environment:
+        type: string
+        message: "发布环境选择错误，当前只支持 test, prepub, release"
+        allow:
+          - test
+          - prepub
+          - release
+      usagePlan:
+        type: object
+        keys:
+          usagePlanId:
+            type: string
+          usagePlanName:
+            type: string
+          usagePlanDesc:
+            type: string
+          maxRequestNum:
+            tppe: number
+      auth:
+        type: object
+        keys:
+          secretName:
+            type: string
+          secretIds:
+            type: string
       customDomains:
         type: array
         items:
@@ -105,15 +177,25 @@ inputs:
               domain:
                 type: string
                 required: true
-              pathMap:
-                type: object
-                keys:
-                  path:
-                    type: string
-                    required: true
-                  environment:
-                    type: string
-                    required: true
+              protocol:
+                type: array
+                items:
+                  - type: string
+                    message: "绑定自定义域名的协议类型, 当前支持 http, https"
+                    allow:
+                      - http
+                      - https
+              pathMappingSet:
+                type: array
+                items:
+                  - type: object
+                    keys:
+                      path:
+                        type: string
+                        required: true
+                      environment:
+                        type: string
+                        required: true
       tags:
         type: array
         items:
@@ -125,6 +207,23 @@ inputs:
               value:
                 type: string
                 required: true
+      enableCORS:
+        type: boolean
+      isDisabled:
+        type: boolean
+      api:
+        type: object
+        keys:
+          name: 
+            type: string
+          timeout:
+            type: number
+          cors:
+            type: boolean
+          qualifier:
+            type: string
+      ignoreUpdate:
+        type: boolean
   assets:
     cos:
       type: object
@@ -147,6 +246,14 @@ inputs:
         domain:
           type: string
           required: true
+        autoRefresh:
+          type: boolean
+        refreshType:
+          type: string
+          message: "CDN 刷新类型，可选 delete：刷新全部资源，flush：刷新变更资源"
+          allow:
+            - delete
+            - flush
         forceRedirect:
           type: object
           keys:
@@ -156,23 +263,37 @@ inputs:
               allow:
                 - on
                 - off
-            https:
-              type: object
-              keys:
-                certId:
-                  type: string
-                  required: true
-                http2:
-                  type: string
-                  required: true
-                  message: "是否开启 HTTP2 配置错误，on： 开启，off： 关闭"
-                  allow:
-                    - on
-                    - off
-            area:
+            redirectType:
               type: string
-              message: "area 参数错误，请参考: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#cdn"
+              message: "访问强制跳转类型，http：强制 http 跳转，https：强制 https 跳转"
               allow:
-                - mainland
-                - overseas
-                - global
+                - http
+                - https
+            redirectStatusCode:
+              type: number
+              message: "强制跳转时返回状态码，支持 301、302"
+              allow:
+                - 301
+                - 302
+        https:
+          type: object
+            keys:
+              certId:
+                type: string
+                required: true
+              http2:
+                type: string
+                required: true
+                message: "是否开启 HTTP2 配置错误，on： 开启，off： 关闭"
+                allow:
+                  - on
+                  - off
+        area:
+          type: string
+          message: "area 参数错误，请参考: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#cdn"
+          allow:
+            - mainland
+            - overseas
+            - global
+        ignoreUpdate:
+          type: boolean
