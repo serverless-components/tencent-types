@@ -1,8 +1,6 @@
 # component doc: https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md
 
 inputs:
-  src:
-    type: "src/object"
   type:
     type: string
     message: "type 无法识别,当前只支持 event 和 web"
