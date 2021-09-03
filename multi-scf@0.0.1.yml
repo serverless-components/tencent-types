@@ -7,6 +7,23 @@ inputs:
     required: true
   region:
     type: string
+    message: "地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8"
+    allow:
+      - ap-beijing
+      - ap-chengdu
+      - ap-chongqing
+      - ap-guangzhou
+      - ap-hongkong
+      - ap-mumbai
+      - ap-seoul
+      - ap-shanghai
+      - ap-shanghai-fsi
+      - ap-shenzhen-fsi
+      - ap-singapore
+      - ap-tokyo
+      - eu-frankfurt
+      - na-siliconvalley
+      - na-toronto
   runtime:
     type: string
     message: "运行时选择错误，请参考https://cloud.tencent.com/document/product/583/54977"
