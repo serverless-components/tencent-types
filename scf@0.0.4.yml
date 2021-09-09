@@ -177,7 +177,7 @@ inputs:
                   enable:
                     type: boolean
                   cronExpression:
-                    type: number
+                    type: string
                     required: true
                   argument:
                     type: string
