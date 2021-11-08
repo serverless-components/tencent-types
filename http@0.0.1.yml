@@ -226,77 +226,79 @@ inputs:
       ignoreUpdate:
         type: boolean
   assets:
-    cos:
-      type: object
-      required: true
-      keys:
-        bucket:
-          type: string
-          required: true
-        sources:
-          type: array
-          items:
-            - type: object
-              keys:
-                src:
-                  type: string
-                  required: true
-    cdn:
-      type: object
-      keys:
-        domain:
-          type: string
-          required: true
-        autoRefresh:
-          type: boolean
-        #refreshType:
-        #  type: string
-        #  message: CDN 刷新类型，可选 delete：刷新全部资源，flush：刷新变更资源
-        #  allow:
-        #    - delete
-        #    - flush
-        forceRedirect:
-          type: object
-          keys:
-            switch:
-              type: string
-              message: '访问强制跳转配置开关配置失败, on：开启，off：关闭'
-              allow:
-                - 'on'
-                - 'off'
-            redirectType:
-              type: string
-              message: 访问强制跳转类型，http：强制 http 跳转，https：强制 https 跳转
-              allow:
-                - http
-                - https
-            redirectStatusCode:
-              type: number
-              message: 强制跳转时返回状态码，支持 301、302
-              allow:
-                - 301
-                - 302
-        https:
-          type: object
-          keys:
-            certId:
-              type: string
-              required: true
-            http2:
-              type: string
-              required: true
-              message: 是否开启 HTTP2 配置错误，on： 开启，off： 关闭
-              allow:
-                - 'on'
-                - 'off'
-        area:
-          type: string
-          message: >-
-            area 参数错误，请参考:
-            https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#cdn
-          allow:
-            - mainland
-            - overseas
-            - global
-        ignoreUpdate:
-          type: boolean
+    type: object
+    keys:
+      cos:
+        type: object
+        required: true
+        keys:
+          bucket:
+            type: string
+            required: true
+          sources:
+            type: array
+            items:
+              - type: object
+                keys:
+                  src:
+                    type: string
+                    required: true
+      cdn:
+        type: object
+        keys:
+          domain:
+            type: string
+            required: true
+          autoRefresh:
+            type: boolean
+          #refreshType:
+          #  type: string
+          #  message: CDN 刷新类型，可选 delete：刷新全部资源，flush：刷新变更资源
+          #  allow:
+          #    - delete
+          #    - flush
+          forceRedirect:
+            type: object
+            keys:
+              switch:
+                type: string
+                message: '访问强制跳转配置开关配置失败, on：开启，off：关闭'
+                allow:
+                  - 'on'
+                  - 'off'
+              redirectType:
+                type: string
+                message: 访问强制跳转类型，http：强制 http 跳转，https：强制 https 跳转
+                allow:
+                  - http
+                  - https
+              redirectStatusCode:
+                type: number
+                message: 强制跳转时返回状态码，支持 301、302
+                allow:
+                  - 301
+                  - 302
+          https:
+            type: object
+            keys:
+              certId:
+                type: string
+                required: true
+              http2:
+                type: string
+                required: true
+                message: 是否开启 HTTP2 配置错误，on： 开启，off： 关闭
+                allow:
+                  - 'on'
+                  - 'off'
+          area:
+            type: string
+            message: >-
+              area 参数错误，请参考:
+              https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#cdn
+            allow:
+              - mainland
+              - overseas
+              - global
+          ignoreUpdate:
+            type: boolean
