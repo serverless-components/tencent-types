@@ -65,17 +65,17 @@ inputs:
         type: string
         regex: '^[A-Za-z][\w-_]{0,58}[A-Za-z0-9]$'
         message: 只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60 个字符
-      environment:
-        type: array
-        items:
-          - type: object
-            keys:
-              key:
-                type: string
-                required: true
-              value:
-                type: string
-                required: true
+      #environment:
+      #  type: array
+      #  items:
+      #    - type: object
+      #      keys:
+      #        key:
+      #          type: string
+      #          required: true
+      #        value:
+      #          type: string
+      #          required: true
       vpc:
         type: object
         keys:
@@ -135,8 +135,8 @@ inputs:
     keys:
       id:
         type: string
-      name:
-        type: string
+      #name:
+      #  type: string
       protocols:
         type: array
         items:
@@ -162,14 +162,14 @@ inputs:
           usagePlanDesc:
             type: string
           maxRequestNum:
-            tppe: number
-      auth:
-        type: object
-        keys:
-          secretName:
-            type: string
-          secretIds:
-            type: string
+            type: number
+      #auth:
+      #  type: object
+      #  keys:
+      #    secretName:
+      #      type: string
+      #    secretIds:
+      #      type: string
       customDomains:
         type: array
         items:
@@ -194,9 +194,9 @@ inputs:
                       path:
                         type: string
                         required: true
-                      environment:
-                        type: string
-                        required: true
+                      #environment:
+                      #  type: string
+                      #  required: true
       tags:
         type: array
         items:
@@ -215,10 +215,10 @@ inputs:
       api:
         type: object
         keys:
-          name:
-            type: string
-          timeout:
-            type: number
+          #name:
+          #  type: string
+          #timeout:
+          #  type: number
           cors:
             type: boolean
           qualifier:
@@ -249,12 +249,12 @@ inputs:
           required: true
         autoRefresh:
           type: boolean
-        refreshType:
-          type: string
-          message: CDN 刷新类型，可选 delete：刷新全部资源，flush：刷新变更资源
-          allow:
-            - delete
-            - flush
+        #refreshType:
+        #  type: string
+        #  message: CDN 刷新类型，可选 delete：刷新全部资源，flush：刷新变更资源
+        #  allow:
+        #    - delete
+        #    - flush
         forceRedirect:
           type: object
           keys:
