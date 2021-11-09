@@ -88,9 +88,9 @@ inputs:
         min: 1
         max: 900
         message: 'timeout 取值范围是 [1, 900]'
-        messageLevel: 'warning'
+        level: 'warning'
       memorySize:
-        messageLevel: 'warning'
+        level: 'warning'
         type: number
         min: 64
         max: 3072
