@@ -39,7 +39,7 @@ inputs:
       - CustomRuntime
   memorySize:
     type: number
-    messageLevel: 'warning'
+    level: 'warning'
     min: 64
     max: 3072
     message: "内存大小选择错误，可选范围 64、128MB-3072MB，并且以 128MB 为阶梯"
@@ -73,7 +73,7 @@ inputs:
     type: number
     min: 1
     message: "数字类型，最小值为1"
-    messageLevel: 'warning'
+    level: 'warning'
   ignoreTriggers:
     type: boolean
   isAutoPublish:
