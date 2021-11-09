@@ -25,7 +25,7 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 | field        | 必填 | 备注                         |
 | ------------ | ---- | ---------------------------- |
 | message      | 否   | 全局消息，每一次部署都展示给用户   |
-| messageLevel | 否   | 默认 `error`，可设置为 `warning`(不中断部署)                 |
+| messageLevel | 否   | 默认 `warning`(不中断部署)，可设置为 `error`                |
 | inputs       | 否   | 对 inputs 内容进行校验的规则 |
 
 
@@ -38,6 +38,10 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 | rules    | 否   | 用户填写多个规则                 |    数组类型         |
 | items    | 否   |                                                 | 数组类型    |
 | keys     | 否   |                                                 | Object 类型 |
+
+#### 关于 message 和 level
+
+字段可以配置自定义的错误消息 `message`，和错误等级 `level`。`level` 默认为 `error` 等级，用户某字段的配置不符合规定时会中断用户部署。如果设为 `warning` 则只会提示用户，不会中断部署
 
 > 只有一个规则时，可以将规则直接写在inputs字段条件中，不需要嵌套在 rules
 
