@@ -25,7 +25,7 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 | field        | 必填 | 备注                         |
 | ------------ | ---- | ---------------------------- |
 | message      | 否   | 全局消息，每一次部署都展示给用户   |
-| messageLevel | 否   | 默认 warning，不中断部署                 |
+| messageLevel | 否   | 默认 `error`，可设置为 `warning`(不中断部署)                 |
 | inputs       | 否   | 对 inputs 内容进行校验的规则 |
 
 
