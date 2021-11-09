@@ -114,8 +114,8 @@ inputs:
     type: number
     min: 1
     max: 30
-    messageLevel: "函数初始化超时时间，单位为秒，可选值范围 1-30 秒"
-    message: "warning"
+    message: "函数初始化超时时间，单位为秒，可选值范围 1-30 秒"
+    messageLevel: "warning"
   #cfs:
   #  type: array
   #  items:
