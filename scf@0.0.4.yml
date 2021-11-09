@@ -53,7 +53,7 @@ inputs:
       - na-siliconvalley
       - na-toronto
   memorySize:
-    messageLevel: "warning"
+    level: "warning"
     type: number
     min: 64
     max: 3072
@@ -106,7 +106,7 @@ inputs:
         type: string
         required: true
   timeout:
-    messageLevel: "warning"
+    level: "warning"
     type: number
     min: 1
     message: "数字类型，最小值为1"
@@ -115,7 +115,7 @@ inputs:
     min: 1
     max: 30
     message: "函数初始化超时时间，单位为秒，可选值范围 1-30 秒"
-    messageLevel: "warning"
+    level: "warning"
   #cfs:
   #  type: array
   #  items:
