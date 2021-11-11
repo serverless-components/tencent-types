@@ -114,22 +114,22 @@ inputs:
     max: 30
     message: "函数初始化超时时间，单位为秒，可选值范围 1-30 秒"
     level: "warning"
-  #cfs:
-  #  type: array
-  #  items:
-  #    - type: object
-  #      keys:
-  #        cfsId:
-  #          type: string
-  #          required: true
-  #        mountInsId:
-  #          type: string
-  #        localMountDir:
-  #          type: string
-  #          required: true
-  #        remoteMountDir:
-  #          type: string
-  #          required: true
+  cfs:
+    type: array
+    items:
+      - type: object
+        keys:
+          cfsId:
+            type: string
+            required: true
+          mountInsId:
+            type: string
+          localMountDir:
+            type: string
+            required: true
+          remoteMountDir:
+            type: string
+            required: true
   publicAccess:
     type: boolean
   eip:
@@ -164,22 +164,22 @@ inputs:
     items:
       - type: object
         keys:
-          #timer:
-          #  type: object
-          #  keys:
-          #    parameters:
-          #      type: object
-          #      required: true
-          #      keys:
-          #        name:
-          #          type: string
-          #        enable:
-          #          type: boolean
-          #          #cronExpression:
-          #          #  type: string
-          #          #  required: true
-          #        argument:
-          #          type: string
+          timer:
+            type: object
+            keys:
+              parameters:
+                type: object
+                required: true
+                keys:
+                  name:
+                    type: string
+                  enable:
+                    type: boolean
+                    cronExpression:
+                      type: string
+                      required: true
+                  argument:
+                    type: string
           apigw:
             type: object
             keys:
@@ -211,19 +211,28 @@ inputs:
                       - release
                       - test
                       - prepub
-                  #endpoints:
-                  #  type: array
-                  #  required: true
-                  #  items:
-                  #    - type: object
-                  #      keys:
-                  #        path:
-                  #          type: string
-                  #          required: true
-                  #        method:
-                  #          type: string
-                  #        enableCORS:
-                  #          type: boolean
+                  endpoints:
+                    type: array
+                    required: true
+                    items:
+                      - type: object
+                        keys:
+                          path:
+                            type: string
+                            required: true
+                          serviceTimeout:
+                            type: number
+                          method:
+                            type: string
+                            allow:
+                              - "ANY"
+                              - "GET"
+                              - "HEAD"
+                              - "POST"
+                              - "PUT"
+                              - "DELETE"
+                          enableCORS:
+                            type: boolean
                   serviceId:
                     type: string
                   serviceName:
@@ -238,60 +247,60 @@ inputs:
                 keys:
                   enable:
                     type: boolean
-                  #bucket:
-                  #  type: string
-                  #  required: true
-                  #filter:
-                  #  type: object
-                  #  required: true
-                  #  keys:
-                  #    prefix:
-                  #      type: string
-                  #    suffix:
-                  #      type: string
-                  #events:
-                  #  required: true
-                  #  type: string
-                  #  message: "cos.events 无法识别，请参考 https://cloud.tencent.com/document/product/583/9707#cos-.E8.A7.A6.E5.8F.91.E5.99.A8.E5.B1.9E.E6.80.A7"
-                  #  allow:
-                  #    - "cos:ObjectCreated:*"
-                  #    - "cos:ObjectCreated:Put"
-                  #    - "cos:ObjectCreated:Post"
-                  #    - "cos:ObjectCreated:Copy"
-                  #    - "cos:ObjectCreated:CompleteMultipartUpload"
-                  #    - "cos:ObjectCreated:Origin"
-                  #    - "cos:ObjectCreated:Replication"
-                  #    - "cos:ObjectRemove:*"
-                  #    - "cos:ObjectRemove:Delete"
-                  #    - "cos:ObjectRemove:DeleteMarkerCreated"
-                  #    - "cos:ObjectRestore:Post"
-                  #    - "cos:ObjectRestore:Completed"
-          #ckafka:
-          #  type: object
-          #  keys:
-          #    parameters:
-          #      type: object
-          #      keys:
-          #        enable:
-          #          type: boolean
-          #        name:
-          #          type: string
-          #        topic:
-          #          type: string
-          #        retry:
-          #          type: number
-          #        maxMsgNum:
-          #          type: number
-          #          min: 1
-          #          max: 10000
-          #          message: "ckafka.maxMsgNum 的取值范围是[1, 100000]"
-          #        offset:
-          #          type: string
-          #          message: "ckafka.offset 配置无法识别，当前只支持 latest, earliest, timestamp"
-          #          allow:
-          #            - latest
-          #            - earliest
-          #            - timestamp
+                  bucket:
+                    type: string
+                    required: true
+                  filter:
+                    type: object
+                    required: true
+                    keys:
+                      prefix:
+                        type: string
+                      suffix:
+                        type: string
+                  events:
+                    required: true
+                    type: string
+                    message: "cos.events 无法识别，请参考 https://cloud.tencent.com/document/product/583/9707#cos-.E8.A7.A6.E5.8F.91.E5.99.A8.E5.B1.9E.E6.80.A7"
+                    allow:
+                      - "cos:ObjectCreated:*"
+                      - "cos:ObjectCreated:Put"
+                      - "cos:ObjectCreated:Post"
+                      - "cos:ObjectCreated:Copy"
+                      - "cos:ObjectCreated:CompleteMultipartUpload"
+                      - "cos:ObjectCreated:Origin"
+                      - "cos:ObjectCreated:Replication"
+                      - "cos:ObjectRemove:*"
+                      - "cos:ObjectRemove:Delete"
+                      - "cos:ObjectRemove:DeleteMarkerCreated"
+                      - "cos:ObjectRestore:Post"
+                      - "cos:ObjectRestore:Completed"
+          ckafka:
+            type: object
+            keys:
+              parameters:
+                type: object
+                keys:
+                  enable:
+                    type: boolean
+                  name:
+                    type: string
+                  topic:
+                    type: string
+                  retry:
+                    type: number
+                  maxMsgNum:
+                    type: number
+                    min: 1
+                    max: 10000
+                    message: "ckafka.maxMsgNum 的取值范围是[1, 100000]"
+                  offset:
+                    type: string
+                    message: "ckafka.offset 配置无法识别，当前只支持 latest, earliest, timestamp"
+                    allow:
+                      - latest
+                      - earliest
+                      - timestamp
           cmq:
             type: object
             keys:
@@ -300,9 +309,9 @@ inputs:
                 keys:
                   enable:
                     type: boolean
-                  #name:
-                  #  type: string
-                  #  required: true
+                  name:
+                    type: string
+                    required: true
           cls:
             type: object
             keys:
@@ -311,8 +320,9 @@ inputs:
                 keys:
                   enable:
                     type: boolean
-                  #topicId:
-                  #  type: string
+                  topicId:
+                    type: string
+                    required: true
                   maxWait:
                     message: "cls.maxWait 的取值范围是 [3, 300]"
                     type: number
@@ -328,6 +338,7 @@ inputs:
                     type: boolean
                   type:
                     type: string
+                    required: true
                     message: "mps.type 无法识别，当前只支持 WorkflowTask, EditMediaTask"
                     allow:
                       - WorkflowTask
