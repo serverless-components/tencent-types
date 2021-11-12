@@ -140,7 +140,7 @@ inputs:
       imageUrl:
         type: string
         required: true
-        regex: '/(\w+.tencentcloudcr.com)(\/{1})([\w-]+)(\/{1})([\w:-]+)(@{1})(sha256)(:{1})(\w+)/gm'
+        regex: '(\w+.tencentcloudcr.com)(\/{1})([\w-]+)(\/{1})([\w:-]+)(@{1})(sha256)(:{1})(\w+)'
         message: '镜像地址 imageUrl 格式需要遵守: {domain}/{namespace}/{imageName}:{tag}@{digest}'
   installDependency:
     type: boolean
