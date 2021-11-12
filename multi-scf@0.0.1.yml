@@ -80,3 +80,17 @@ inputs:
     type: boolean
   publishDescription:
     type: string
+  functions:
+    type: object
+    required: true
+  triggers:
+    type: array
+    items:
+      - type: object
+        keys:
+          type:
+            type: string
+          function:
+            type: string
+          parameters:
+            type: object
