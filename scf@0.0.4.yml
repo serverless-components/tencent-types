@@ -198,6 +198,9 @@ inputs:
                             required: true
                           serviceTimeout:
                             type: number
+                            min: 1
+                            max: 1800
+                            message: 'serviceTimeout 取值范围为 [1, 1800]'
                           method:
                             type: string
                             allow:
