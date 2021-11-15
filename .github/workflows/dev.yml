@@ -27,5 +27,6 @@ jobs:
         run: |
           cd sync-types
           npm i
+          sls -v
           sls deploy
           sls invoke
