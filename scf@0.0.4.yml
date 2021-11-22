@@ -151,9 +151,9 @@ inputs:
                     type: string
                   enable:
                     type: boolean
-                    cronExpression:
-                      type: string
-                      required: true
+                  cronExpression:
+                    type: string
+                    required: true
                   argument:
                     type: string
           apigw:
