@@ -85,9 +85,7 @@ inputs:
         type: number
         min: 1
         message: 'timeout 取值最低1'
-        level: 'warning'
       memorySize:
-        level: 'warning'
         type: number
         min: 64
         message: 内存大小选择错误，最低64MB
