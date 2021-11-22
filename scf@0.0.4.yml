@@ -53,7 +53,6 @@ inputs:
       - na-siliconvalley
       - na-toronto
   memorySize:
-    level: "warning"
     type: number
     min: 64
     message: "内存大小选择错误，最低64MB"
@@ -79,7 +78,6 @@ inputs:
         type: string
         required: true
   timeout:
-    level: "warning"
     type: number
     min: 1
     message: "数字类型，最小值为1"
@@ -87,7 +85,6 @@ inputs:
     type: number
     min: 1
     message: "函数初始化超时时间，单位为秒，最低1s"
-    level: "warning"
   cfs:
     type: array
     items:
