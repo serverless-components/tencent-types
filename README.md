@@ -53,4 +53,4 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 ## How to use
 
 - To sync types to dev env: run [this workflow](https://github.com/serverless-components/tencent-types/actions/workflows/dev.yml)
-- To sync types to dev env: run [this workflow](https://github.com/serverless-components/tencent-types/actions/workflows/prod.yml)
+- To sync types to prod env: run [this workflow](https://github.com/serverless-components/tencent-types/actions/workflows/prod.yml)
