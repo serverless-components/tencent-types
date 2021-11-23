@@ -1,4 +1,4 @@
-name: CI for dev
+name: CI for prod
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -12,10 +12,10 @@ jobs:
       SERVERLESS_PLATFORM_VENDOR: tencent
       TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
       TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
-      REGION: ap-shanghai
-      REDIS_HOST: ${{ secrets.REDIS_HOST_DEV }}
-      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_DEV }}
-      REDIS_PORT: ${{ secrets.REDIS_PORT_DEV }}
+      REGION: ap-guangzhou
+      REDIS_HOST: ${{ secrets.REDIS_HOST_PROD }
+      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_PROD }}
+      REDIS_PORT: ${{ secrets.REDIS_PORT_PROD }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
