@@ -83,6 +83,434 @@ inputs:
             message: "在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符*"
           maxAgeSeconds:
             type: number
+  hosts:
+    type: array
+    items:
+      - type: object
+        keys:
+          async:
+            type: boolean
+          area:
+            type: string
+            message: 'area 字段只支持 mainland, overseas, global'
+            allow:
+              - mainland
+              - overseas
+              - global
+          autoRefresh:
+            type: boolean
+          onlyRefresh:
+            type: boolean
+          refreshCdn:
+            type: object
+            keys:
+              urls:
+                type: array
+                items:
+                  - type: string
+          pushCdn:
+            type: object
+            keys:
+              urls:
+                type: array
+                items:
+                  - type: string
+          host:
+            type: string
+            required: true
+          https:
+            type: object
+            keys:
+              Switch:
+                type: boolean
+                required: true
+                allow:
+                  - on
+                  - off
+              Http2:
+                type: string
+                allow:
+                  - on
+                  - off
+              OcspStapling:
+                type: string
+                allow:
+                  - on
+                  - off
+              VerifyClient:
+                type: string
+                allow:
+                  - on
+                  - off
+              CertInfo:
+                type: object
+                keys:
+                  CertId:
+                    type: string
+                  CertName:
+                    type: string
+                  Certificate:
+                    type: string
+                  PrivateKey:
+                    type: string
+                  ExpireTime:
+                    type: number
+                  DeployTime:
+                    type: number
+                  Message:
+                    type: string
+              ClientCertInfo:
+                type: object
+                keys:
+                  Certificate:
+                    type: string
+                    required: true
+                  CertName:
+                    type: string
+                  ExpireTime:
+                    type: number
+                  DeployTime:
+                    type: number
+              Spdy:
+                type: string
+                allow:
+                  - on
+                  - off
+              SslStatus:
+                type: string
+                allow:
+                  - closed
+                  - deploying
+                  - deployed
+                  - failed
+              Hsts:
+                type: object
+                keys:
+                  Switch:
+                    type: string
+                    allow:
+                      - on
+                      - off
+                  MaxAge:
+                    type: number
+                  IncludeSubDomains:
+                    type: string
+                    allow:
+                      - on
+                      - off
+              TlsVersion:
+                type: array
+                items:
+                  - type: string
+                    allow:
+                      - 'TLSv1'
+                      - 'TLSV1.1'
+                      - 'TLSV1.2'
+                      - 'TLSv1.3'
+          cacheKey:
+            type: object
+            keys:
+              FullUrlCache:
+                type: string
+                allow:
+                  - on
+                  - off
+              IgnoreCase:
+                type: string
+              Querystring:
+                type: object
+                keys:
+                  Switch:
+                    required: true
+                    type: string
+                    allow:
+                      - on
+                      - off
+                  Reorder:
+                    type: string
+                  Action:
+                    type: string
+                  Value:
+                    type: string
+              Cookie:
+                type: object
+                keys:
+                  Switch:
+                    type: string
+                    required: true
+                    allow:
+                      - on
+                      - off
+                  Value:
+                    type: string
+              Header:
+                type: object
+                keys:
+                  Switch:
+                    type: string
+                  Value:
+                    type: string
+              CacheTag:
+                type: object
+                keys:
+                  Switch:
+                    required: true
+                    type: string
+                  Value:
+                    type: string
+              Scheme:
+                type: object
+                keys:
+                  Switch:
+                    type: string
+                    required: true
+                    allow:
+                      - on
+                      - off
+              KeyRules:
+                type: array
+                items:
+                  - type: object
+                    keys:
+                      RulePaths:
+                        required: true
+                        type: array
+                        items:
+                          - type: string
+                      RuleType:
+                        type: string
+                        required: true
+                      FullUrlCache:
+                        type: string
+                        required: true
+                        allow:
+                          - on
+                          - off
+                      IgnoreCase:
+                        type: string
+                        required: true
+                      Querystring:
+                        type: object
+                        keys:
+                          Switch:
+                            type: string
+                            required: true
+                          Action:
+                            type: string
+                            required: true
+                          Value:
+                            type: string
+                            required: true
+                      RuleTag:
+                        type: string
+                        required: true
+          cache:
+            type: object
+            keys:
+              SimpleCache:
+                type: object
+                keys:
+                  CacheRules:
+                    type: array
+                    required: true
+                    items:
+                      - type: object
+                        keys:
+                          CacheType:
+                            required: true
+                            type: string
+                            allow:
+                              - all
+                              - file
+                              - directory
+                              - path
+                              - index
+                          CacheContents:
+                            required: true
+                            type: array
+                            item:
+                              - type: string
+                          CacheTime:
+                            required: true
+                            type: number
+                  FollowOrigin:
+                    type: string
+                    required: true
+                    allow:
+                      - on
+                      - off
+                  IgnoreCacheControl:
+                    required: true
+                    type: string
+                  IgnoreSetCookie:
+                    required: true
+                    type: string
+                  CompareMaxAge:
+                    required: true
+                    type: string
+                  Revalidate:
+                    type: object
+                    keys:
+                      Switch:
+                        type: string
+                        allow:
+                          - on
+                          - off
+                        required: true
+                      Path:
+                        type: string
+              RuleCache:
+                type: array
+                items:
+                  - type: object
+                    keys:
+                      RulePaths:
+                        type: array
+                        required: true
+                        items:
+                          - type: string
+                      RuleType:
+                        type: string
+                        required: true
+                      CacheConfig:
+                        type: object
+                        required: true
+                        keys:
+                          Cache:
+                            required: true
+                            type: object
+                            keys:
+                              Switch:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+                              CacheTime:
+                                required: true
+                                type: number
+                              CompareMaxAge:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+                              IgnoreCacheControl:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+                              IgnoreSetCookie:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+                          NoCache:
+                            required: true
+                            type: object
+                            keys:
+                              Switch:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+                              Revalidate:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+                          FollowOrigin:
+                            required: true
+                            type: object
+                            keys:
+                              Switch:
+                                required: true
+                                type: string
+                                allow:
+                                  - on
+                                  - off
+          referer:
+            type: object
+            keys:
+              Switch:
+                type: string
+                required: true
+                allow:
+                  - on
+                  - off
+              RefererRules:
+                type: array
+                items:
+                  - type: object
+                    keys:
+                      RuleType:
+                        type: string
+                        required: true
+                      RulePaths:
+                        required: true
+                        type: array
+                        items:
+                          - type: string
+                      RefererType:
+                        required: true
+                        type: string
+                        allow:
+                          - whitelist
+                          - blacklist
+                      Referers:
+                        required: true
+                        type: array
+                        items:
+                          - type: string
+                      AllowEmpty:
+                        required: true
+                        type: boolean
+          ipFilter:
+            type: object
+            keys:
+              Switch:
+                required: true
+                type: string
+                allow:
+                  - on
+                  - off
+              FilterType:
+                type: string
+                allow:
+                  - whitelist
+                  - blacklist
+              Filters:
+                type: array
+                items:
+                  - type: string
+              FilterRules:
+                type: array
+                items:
+                  - type: object
+                    keys:
+                      FilterType:
+                        required: true
+                        type: string
+                        allow:
+                          - whitelist
+                          - blacklist
+                      Filters:
+                        required: true
+                        type: array
+                        items:
+                          - type: string
+                      RuleType:
+                        required: true
+                        type: string
+                      RulePaths:
+                        required: true
+                        type: array
+                        items:
+                          - type: string
   autoSetupAcl:
     type: boolean
   autoSetupPolicy:
