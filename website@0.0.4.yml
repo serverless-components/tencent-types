@@ -377,7 +377,6 @@ inputs:
                         required: true
                         keys:
                           Cache:
-                            required: true
                             type: object
                             keys:
                               Switch:
@@ -408,7 +407,6 @@ inputs:
                                   - on
                                   - off
                           NoCache:
-                            required: true
                             type: object
                             keys:
                               Switch:
@@ -424,7 +422,6 @@ inputs:
                                   - on
                                   - off
                           FollowOrigin:
-                            required: true
                             type: object
                             keys:
                               Switch:
