@@ -50,6 +50,10 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 1. 如果用户没有指定组件版本，使用该组件最新版 types 进行校验
 2. 如果用户指定了组件版本，使用的小于等于组件版本，并且是最新版的 types 进行校验
 
+## 关于用于同步 types 的 SCF instance
+
+除了配置必要的环境变量，在 invoke 之前需要在腾讯云控制台将 SCF 加入 redis 所在的私有网络(VPC)
+
 ## How to use
 
 - To sync types to dev env: run [this workflow](https://github.com/serverless-components/tencent-types/actions/workflows/dev.yml)
