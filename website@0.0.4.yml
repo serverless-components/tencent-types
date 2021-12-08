@@ -122,7 +122,7 @@ inputs:
             type: object
             keys:
               Switch:
-                type: boolean
+                type: string
                 required: true
                 allow:
                   - on
@@ -204,8 +204,8 @@ inputs:
                   - type: string
                     allow:
                       - 'TLSv1'
-                      - 'TLSV1.1'
-                      - 'TLSV1.2'
+                      - 'TLSv1.1'
+                      - 'TLSv1.2'
                       - 'TLSv1.3'
           cacheKey:
             type: object
