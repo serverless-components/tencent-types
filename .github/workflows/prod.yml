@@ -13,7 +13,7 @@ jobs:
       TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
       TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
       REGION: ap-guangzhou
-      REDIS_HOST: ${{ secrets.REDIS_HOST_PROD }
+      REDIS_HOST: ${{ secrets.REDIS_HOST_PROD }}
       REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD_PROD }}
       REDIS_PORT: ${{ secrets.REDIS_PORT_PROD }}
     steps:
