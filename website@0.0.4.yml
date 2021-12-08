@@ -19,12 +19,11 @@ inputs:
         type: string
   bucket:
     type: string
-    required: true
     regex: "^[^A-Z]*$"
-    message: "不允许大写字母。如果你不加 AppId 后缀，则默认自动会为你加上。"
+    message: "名称不合法，请检查后重试。（校验规则：^[^A-Z]*$）"
   region:
     type: string
-    message: "地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8"
+    message: "不支持指定的地域 ，请查看腾讯地域列表获取所有支持的地域信息。 https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8"
     allow:
       - ap-beijing
       - ap-chengdu
@@ -45,7 +44,7 @@ inputs:
     type: boolean
   protocol:
     type: string
-    message: "protocols 无法识别，当前只支持 http, https"
+    message: "不支持该协议，支持的协议有：【 http , https 】"
     allow:
       - http
       - https
@@ -59,7 +58,7 @@ inputs:
           allowedMethods:
             type: array
             required: true
-            message: "允许的 HTTP 操作，枚举值：GET，PUT，HEAD，POST，DELETE"
+            message: "不支持此 HTTP 请求类型，支持 HTTP 请求类型有：【 GET ，PUT ，HEAD ，POST ，DELETE 】"
             items:
               - type: string
                 message:
@@ -72,7 +71,7 @@ inputs:
           allowedOrigins:
             type: array
             required: true
-            message: "允许的访问来源，支持通配符*，格式为：协议://域名[:端口]，例如：http://www.qq.com"
+            message: "不支持当前允许访问来源。支持通配符【 * 】，或规定协议格式【 协议://域名[:端口] 】，例如：http://www.qq.com"
             items:
               - type: string
           allowedHeaders:
@@ -80,7 +79,7 @@ inputs:
             items:
               - type: string
             required: true
-            message: "在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符*"
+            message: "不支持当前请求头部来源。支持通配符【 * 】"
           maxAgeSeconds:
             type: number
   hosts:
@@ -92,7 +91,7 @@ inputs:
             type: boolean
           area:
             type: string
-            message: 'area 字段只支持 mainland, overseas, global'
+            message: '不支持当前地区。支持地区有【  mainland , overseas , global 】'
             allow:
               - mainland
               - overseas
