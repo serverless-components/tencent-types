@@ -3,7 +3,7 @@
 inputs:
   type:
     type: string
-    message: 'type 无法识别,当前只支持 event 和 web'
+    message: '不支持当前类型，支持类型有：【 event , web 】'
     allow:
       - event
       - web
@@ -11,16 +11,16 @@ inputs:
     type: string
     rules:
       - regex: '^[A-Za-z][\w-_]*[A-Za-z0-9]$'
-        message: '只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾'
+        message: '名称不合法，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾'
       - min: 2
-        message: '长度不能小于2'
+        message: '名称过短，长度不能小于2个字符'
       - max: 60
-        message: '长度不能大于60'
+        message: '名称过长，长度不能大于60个字符'
   handler:
     type: string
   runtime:
     type: string
-    message: '运行时选择错误，请参考https://cloud.tencent.com/document/product/583/54977'
+    message: '不支持当前运行时，请参考腾讯语言和运行时支持信息。https://cloud.tencent.com/document/product/583/54977'
     allow:
       - Python2.7
       - Python3.6
@@ -35,7 +35,7 @@ inputs:
       - CustomRuntime
   region:
     type: string
-    message: '地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8'
+    message: '不支持指定的地域 ，请查看腾讯地域列表获取所有支持的地域信息。https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8'
     allow:
       - ap-beijing
       - ap-chengdu
@@ -56,7 +56,7 @@ inputs:
     type: number
     min: 64
     max: 3072
-    message: '可选范围 64、128MB-3072MB，并且以 128MB 为阶梯'
+    message: '内存大小建议区间为 【 64（MB）, 128（MB）- 3072（MB）】 ，并且以 128 （MB）递增'
     allow:
       - 64
       - 128
@@ -109,13 +109,13 @@ inputs:
     type: number
     min: 1
     max: 900
-    message: 'timeout 取值范围为 [1, 900]'
+    message: '超时时间建议取值范围为 【 1（秒）- 900（秒）】'
     level: 'warning'
   initTimeout:
     type: number
     min: 1
     max: 30
-    message: '函数初始化超时时间，单位为秒，可选值范围 1-30 秒'
+    message: '函数初始化超时时间建议取值范围为 【 1（秒）-30（秒）】'
     level: 'warning'
   cfs:
     type: array
@@ -144,7 +144,7 @@ inputs:
         type: string
         required: true
         regex: '([a-z0-9-]{5,50}).tencentcloudcr.com\/([a-z-_.0-9]{2,30})\/([a-z0-9-_.\/]{2,200}):([\w-]+)@sha256:(\w+)'
-        message: '镜像地址 imageUrl 格式需要遵守: {domain}/{namespace}/{imageName}:{tag}@{digest}'
+        message: '镜像地址无效，请检查查后重试 【 校验规则：{domain}/{namespace}/{imageName}:{tag}@{digest} 】'
   installDependency:
     type: boolean
   asyncRunEnable:
@@ -195,7 +195,7 @@ inputs:
                     type: array
                     items:
                       - type: string
-                        message: 'protocols 无法识别，当前只支持 http, https'
+                        message: '不支持该协议，支持的协议有：【 http , https 】'
                         allow:
                           - http
                           - https
@@ -203,7 +203,7 @@ inputs:
                     type: array
                     items:
                       - type: string
-                        message: 'netTypes 无法识别，当前只支持 OUTER, INNER'
+                        message: '不支持该类型，支持的协议有：【 OUTER , INNER 】'
                         allow:
                           - OUTER
                           - INNER
@@ -211,7 +211,7 @@ inputs:
                     type: string
                   environment:
                     type: string
-                    message: 'environment 无法识别，当前只支持 release, test, prepub'
+                    message: '不支持该环境，支持的环境有：【  test , prepub , release 】'
                     allow:
                       - release
                       - test
@@ -229,7 +229,7 @@ inputs:
                             type: number
                             min: 1
                             max: 1800
-                            message: 'serviceTimeout 取值范围为 [1, 1800]'
+                            message: '超时时间建议取值范围为 【 1（秒）- 1800（秒）】'
                           method:
                             type: string
                             allow:
@@ -239,6 +239,7 @@ inputs:
                               - 'POST'
                               - 'PUT'
                               - 'DELETE'
+                            message: '不支持该类型，支持的类型有【 ANY ， GET , HEAD , POST , PUT , DELETE】'
                           enableCORS:
                             type: boolean
                   serviceId:
@@ -246,7 +247,7 @@ inputs:
                   serviceName:
                     type: string
                     regex: '^[a-zA-Z][a-zA-Z0-9(_)]{0,48}[a-zA-Z0-9]?$'
-                    message: '最长 50 个字符，支持 a-z,A-Z,0-9,_, 必须字母开头，字母或者数字结尾'
+                    message: '名称不合法，支持 a-z,A-Z,0-9,_, 必须字母开头，字母或者数字结尾，且最长为 50 个字符，'
           cos:
             type: object
             keys:
@@ -269,7 +270,7 @@ inputs:
                   events:
                     required: true
                     type: string
-                    message: 'cos.events 无法识别，请参考 https://cloud.tencent.com/document/product/583/9707#cos-.E8.A7.A6.E5.8F.91.E5.99.A8.E5.B1.9E.E6.80.A7'
+                    message: '不支持此 COS 事件类型，请参腾讯 COS 事件说明文档。https://cloud.tencent.com/document/product/583/9707#cos-.E8.A7.A6.E5.8F.91.E5.99.A8.E5.B1.9E.E6.80.A7'
                     allow:
                       - 'cos:ObjectCreated:*'
                       - 'cos:ObjectCreated:Put'
@@ -301,10 +302,10 @@ inputs:
                     type: number
                     min: 1
                     max: 10000
-                    message: 'ckafka.maxMsgNum 的取值范围是[1, 100000]'
+                    message: '不支持该消息数量，支持的数量范围：【 1 - 10000 】'
                   offset:
                     type: string
-                    message: 'ckafka.offset 配置无法识别，当前只支持 latest, earliest, timestamp'
+                    message: '不支持该类型，支持的类型有【 latest , earliest , timestamp 】'
                     allow:
                       - latest
                       - earliest
@@ -332,7 +333,7 @@ inputs:
                     type: string
                     required: true
                   maxWait:
-                    message: 'cls.maxWait 的取值范围是 [3, 300]'
+                    message: '不支持该等待数量，支持的数量范围：【 3 - 300 】'
                     type: number
                     min: 3
                     max: 300
@@ -347,7 +348,7 @@ inputs:
                   type:
                     type: string
                     required: true
-                    message: 'mps.type 无法识别，当前只支持 WorkflowTask, EditMediaTask'
+                    message: '不支持该类型，支持的类型有【 WorkflowTask , EditMediaTask 】'
                     allow:
                       - WorkflowTask
                       - EditMediaTask
@@ -363,7 +364,7 @@ inputs:
                   protocol:
                     type: string
                     required: true
-                    message: 'clb.protocal 是必填字段，并且当前只支持 HTTP, HTTPS'
+                    message: '不支持该协议，支持的协议有：【 HTTP , HTTPS 】'
                     allow:
                       - HTTP
                       - HTTPS
@@ -377,7 +378,7 @@ inputs:
                     type: string
                     required: true
                   weight:
-                    message: 'clb.weight 取值范围是 [1, 100]'
+                    message: '不支持该数量，支持的数量范围：【 0 - 100 】'
                     type: number
                     min: 0
                     max: 100
