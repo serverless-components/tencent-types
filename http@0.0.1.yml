@@ -84,12 +84,40 @@ inputs:
       timeout:
         type: number
         min: 1
-        message: 'timeout 取值最低1'
+        max: 900
+        message: 'timeout 取值范围为 [1, 900]'
         level: 'warning'
       memorySize:
         type: number
         min: 64
-        message: 内存大小选择错误，最低64MB
+        max: 3072
+        message: '可选范围 64、128MB-3072MB，并且以 128MB 为阶梯'
+        allow:
+          - 64
+          - 128
+          - 256
+          - 384
+          - 512
+          - 640
+          - 768
+          - 896
+          - 1024
+          - 1152
+          - 1280
+          - 1408
+          - 1536
+          - 1664
+          - 1792
+          - 1920
+          - 2048
+          - 2176
+          - 2304
+          - 2432
+          - 2560
+          - 2688
+          - 2816
+          - 2944
+          - 3072
         level: 'warning'
       tags:
         type: array
