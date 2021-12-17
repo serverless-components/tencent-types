@@ -3,14 +3,14 @@
 inputs:
   type:
     type: string
-    message: 'type 无法识别,当前只支持 event 和 web'
+    message: '不支持当前类型，支持类型有：【 event , web 】'
     allow:
       - event
       - web
   region:
     type: string
     message: >-
-      地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
+      不支持指定的地域 ，请查看腾讯地域列表获取所有支持的地域信息。https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
     allow:
       - ap-beijing
       - ap-chengdu
@@ -44,11 +44,11 @@ inputs:
           - django
           - laravel
         message: >-
-          framework 参数选择错误，请参考:
-          https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#faas
+          不支持此Web框架，请查看 http 组件支持的框架列表。
+          https://cn.serverless.com/framework/docs-components#%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BA%94%E7%94%A8
       runtime:
         type: string
-        message: '运行时选择错误，请参考https://cloud.tencent.com/document/product/583/54977'
+        message: '不支持当前运行时，请参考腾讯语言和运行时支持信息。https://cloud.tencent.com/document/product/583/54977'
         allow:
           - Python2.7
           - Python3.6
@@ -64,7 +64,7 @@ inputs:
       name:
         type: string
         regex: '^[A-Za-z][\w-_]{0,58}[A-Za-z0-9]$'
-        message: 只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60 个字符
+        message: 名称不合法，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60 个字符
       environment:
         type: array
         items:
@@ -84,11 +84,11 @@ inputs:
       timeout:
         type: number
         min: 1
-        message: 'timeout 取值最低1'
+        message: '超时时间无效，超时时间不能小于 1（秒）'
       memorySize:
         type: number
         min: 64
-        message: 内存大小选择错误，最低64MB
+        message: 内存配置无效，内存最小不能小于 64 （MB）
       tags:
         type: array
         items:
@@ -108,18 +108,18 @@ inputs:
       name:
         type: string
         regex: '^[A-Za-z][\w-_]{0,48}[A-Za-z0-9]$'
-        message: 只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~50 个字符
+        message: 名称不合法，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~50 个字符
       protocols:
         type: array
         items:
           - type: string
-            message: 'protocols 无法识别，当前只支持 http, https'
+            message: '不支持该协议，支持的协议有：【 http , https 】'
             allow:
               - http
               - https
       environment:
         type: string
-        message: '发布环境选择错误，当前只支持 test, prepub, release'
+        message: '不支持该环境，支持的环境有：【  test , prepub , release 】'
         allow:
           - test
           - prepub
@@ -154,7 +154,7 @@ inputs:
                 type: array
                 items:
                   - type: string
-                    message: '绑定自定义域名的协议类型, 当前支持 http, https'
+                    message: '不支持该协议，支持的协议有：【 http , https 】'
                     allow:
                       - http
                       - https
@@ -169,7 +169,7 @@ inputs:
                       environment:
                         type: string
                         required: true
-                        message: '发布环境选择错误，当前只支持 test, prepub, release'
+                        message: '不支持该环境，支持的环境有：【  test , prepub , release 】'
                         allow:
                           - test
                           - prepub
@@ -195,12 +195,11 @@ inputs:
           name:
             type: string
             regex: '^[A-Za-z][\w-_]{0,48}[A-Za-z0-9]$'
-            message: 只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~50 个字符
+            message: 名称不合法，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~50 个字符
           timeout:
             type: number
             min: 1
-            max: 1800
-            message: '取值范围为 [1, 1800]'
+            message: '超时时间无效，超时时间不能小于 1（秒）'
           cors:
             type: boolean
           qualifier:
@@ -235,7 +234,7 @@ inputs:
             type: boolean
           refreshType:
             type: string
-            message: CDN 刷新类型，可选 delete：刷新全部资源，flush：刷新变更资源
+            message: 不支持该刷新类型，支持的刷新类型有：【 delete（刷新全部资源），flush（刷新变更资源）】
             allow:
               - delete
               - flush
@@ -244,19 +243,19 @@ inputs:
             keys:
               switch:
                 type: string
-                message: '访问强制跳转配置开关配置失败, on：开启，off：关闭'
+                message: '启用状态配置错误，支持的配置有：【 on（启用强制跳转），off（禁用强制跳转） 】'
                 allow:
                   - 'on'
                   - 'off'
               redirectType:
                 type: string
-                message: 访问强制跳转类型，http：强制 http 跳转，https：强制 https 跳转
+                message: 不支持该强制跳转类型，支持的类型有：【 http （强制 http 跳转）, https （强制 https 跳转）】
                 allow:
                   - http
                   - https
               redirectStatusCode:
                 type: number
-                message: 强制跳转时返回状态码，支持 301、302
+                message: 不支持该状态码，支持的类型有 【 301 ， 302 】
                 allow:
                   - 301
                   - 302
@@ -269,15 +268,14 @@ inputs:
               http2:
                 type: string
                 required: true
-                message: 是否开启 HTTP2 配置错误，on： 开启，off： 关闭
+                message: 启用状态配置错误，支持的配置有：【 on（启用HTTP2），off（禁用HTTP2） 】
                 allow:
                   - 'on'
                   - 'off'
           area:
             type: string
             message: >-
-              area 参数错误，请参考:
-              https://github.com/serverless-components/tencent-http/blob/master/docs/configure.md#cdn
+              不支持该加速区域，支持的区域有【 mainland（大陆），overseas（海外），global（全球）】
             allow:
               - mainland
               - overseas
