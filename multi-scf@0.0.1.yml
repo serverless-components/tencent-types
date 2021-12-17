@@ -41,10 +41,12 @@ inputs:
     type: number
     min: 64
     message: "内存大小选择错误，最低 64MB"
+    level: 'warning'
   timeout:
     type: number
     min: 1
     message: "数字类型，最小值为1"
+    level: 'warning'
   ignoreTriggers:
     type: boolean
   isAutoPublish:
