@@ -54,8 +54,6 @@ inputs:
       - na-toronto
   memorySize:
     type: number
-    min: 64
-    max: 3072
     message: '可选范围 64、128MB-3072MB，并且以 128MB 为阶梯'
     allow:
       - 64
