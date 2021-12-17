@@ -88,7 +88,7 @@ inputs:
       memorySize:
         type: number
         min: 64
-        message: 内存配置无效，内存最小不能小于 64 （MB）
+        message: 内存配置无效，内存最小不能小于 64（MB）
       tags:
         type: array
         items:
