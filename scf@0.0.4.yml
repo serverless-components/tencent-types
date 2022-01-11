@@ -162,10 +162,16 @@ inputs:
         type: object
         keys:
           idleTimeOut:
-            message: '超时时间取值范围为 【 1（秒）- 1800（秒）】'
+            message: 'idleTimeOut 空闲超时时间的取值范围为 【 1（秒）- 1800（秒）】'
             type: number
             min: 1
             max: 1800
+  provisionedNum:
+    type: number
+    max: 100
+    message: "provisionedNum 预置并发数量的上限为 100"
+  qualifier:
+    type: number
   asyncRunEnable:
     type: boolean
   l5Enable:
