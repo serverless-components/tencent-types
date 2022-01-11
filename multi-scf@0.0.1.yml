@@ -5,7 +5,7 @@
 inputs:
   region:
     type: string
-    message: '地区选择错误，https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8'
+    message: '不支持指定的地域 ，请查看腾讯地域列表获取所有支持的地域信息。https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8'
     allow:
       - ap-beijing
       - ap-chengdu
@@ -24,7 +24,7 @@ inputs:
       - na-toronto
   runtime:
     type: string
-    message: '运行时选择错误，请参考https://cloud.tencent.com/document/product/583/54977'
+    message: '不支持当前运行时，请参考腾讯语言和运行时支持信息。请参考https://cloud.tencent.com/document/product/583/54977'
     allow:
       - Python2.7
       - Python3.6

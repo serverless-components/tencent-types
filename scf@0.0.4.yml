@@ -3,7 +3,7 @@
 inputs:
   type:
     type: string
-    message: 'type 无法识别,当前只支持 event 和 web'
+    message: '不支持当前类型，支持类型有：[event , web]'
     allow:
       - event
       - web
@@ -151,6 +151,27 @@ inputs:
         message: '镜像地址 imageUrl 格式需要遵守: {domain}/{namespace}/{imageName}:{tag}@{digest}'
   installDependency:
     type: boolean
+  protocolType:
+    type: string
+    allow:
+      - WS # inputs.type = web 时才会生效
+  protocolParams:
+    type: object
+    keys:
+      wsParams:
+        type: object
+        keys:
+          idleTimeOut:
+            message: 'idleTimeOut 空闲超时时间的取值范围为 【 1（秒）- 1800（秒）】'
+            type: number
+            min: 1
+            max: 1800
+  provisionedNum:
+    type: number
+    max: 100
+    message: "provisionedNum 预置并发数量的上限为 100"
+  qualifier:
+    type: number
   asyncRunEnable:
     type: boolean
   l5Enable:
