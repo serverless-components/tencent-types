@@ -3,7 +3,7 @@
 inputs:
   type:
     type: string
-    message: 'type 无法识别,当前只支持 event 和 web'
+    message: '不支持当前类型，支持类型有：[event , web]'
     allow:
       - event
       - web
