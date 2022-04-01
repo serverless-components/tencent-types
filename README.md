@@ -58,3 +58,17 @@ Design doc: https://hackmd.io/4q5NJy6pRse5xfM9E0Tkrw
 
 - To sync types to dev env: run [this workflow](https://github.com/serverless-components/tencent-types/actions/workflows/dev.yml)
 - To sync types to prod env: run [this workflow](https://github.com/serverless-components/tencent-types/actions/workflows/prod.yml)
+
+
+## 关于 multi-scf 服务端校验规则
+
+由于 multi-scf 校验规则的特殊性，除了定义在 types 中的校验规则，在服务端做了如下校验
+
+- functions 定义支持 object 类型和 array 类型
+- triggers 引用的 function 必须已经定义
+- 当 function.type 为 web 时，允许 function.handler 与 function.image 都不定义
+- function.handler 存在时，必须为字符串类型
+- function.memorySize 存在时，必须为数字类型且不小于 64
+- function.timeout 存在时，必须为数字类型且不小于1
+- environment 环境变量必须为 arryay，并且每个 item 必须包含 key, value 配置
+- 当 function.image 存在时，installDependency 不能为 true
